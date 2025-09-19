@@ -7,7 +7,7 @@ PhysicMaterial:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HeavyMetalPinball
-  dynamicFriction: 0
+  dynamicFriction: 0.05
   staticFriction: 0.05
   bounciness: 0.4
   frictionCombine: 1

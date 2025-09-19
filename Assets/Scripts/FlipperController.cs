@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class FlipperController : MonoBehaviour
 {
     [SerializeField]
@@ -20,36 +21,58 @@ public class FlipperController : MonoBehaviour
     private Quaternion _baseRotation;
     private Vector3 _normalizedAxis;
     private float _currentAngle;
+    private float _targetAngle;
+    private Rigidbody _rigidbody;
 
     private void Awake()
     {
+        _rigidbody = GetComponent<Rigidbody>();
         _baseRotation = transform.localRotation;
         _normalizedAxis = rotationAxis.sqrMagnitude > Mathf.Epsilon
             ? rotationAxis.normalized
             : Vector3.forward;
-    }
-
-    private void Start()
-    {
         _currentAngle = restAngle;
-        ApplyRotation(_currentAngle);
+        _targetAngle = restAngle;
     }
 
     private void Update()
     {
-        float targetAngle = Input.GetKey(activationKey) ? activeAngle : restAngle;
-        if (!Mathf.Approximately(_currentAngle, targetAngle))
-        {
-            _currentAngle = Mathf.MoveTowards(
-                _currentAngle,
-                targetAngle,
-                moveSpeed * Time.deltaTime);
-            ApplyRotation(_currentAngle);
-        }
+        _targetAngle = Input.GetKey(activationKey) ? activeAngle : restAngle;
     }
 
-    private void ApplyRotation(float angle)
+    private void FixedUpdate()
     {
-        transform.localRotation = Quaternion.AngleAxis(angle, _normalizedAxis) * _baseRotation;
+        if (Mathf.Approximately(_currentAngle, _targetAngle))
+        {
+            return;
+        }
+
+        _currentAngle = Mathf.MoveTowards(
+            _currentAngle,
+            _targetAngle,
+            moveSpeed * Time.fixedDeltaTime);
+        ApplyRotation(_currentAngle, useMoveRotation: true);
+    }
+
+    private void OnEnable()
+    {
+        ApplyRotation(_currentAngle, useMoveRotation: false);
+    }
+
+    private void ApplyRotation(float angle, bool useMoveRotation)
+    {
+        Quaternion localRotation = Quaternion.AngleAxis(angle, _normalizedAxis) * _baseRotation;
+        Quaternion targetRotation = transform.parent != null
+            ? transform.parent.rotation * localRotation
+            : localRotation;
+
+        if (useMoveRotation)
+        {
+            _rigidbody.MoveRotation(targetRotation);
+        }
+        else
+        {
+            _rigidbody.rotation = targetRotation;
+        }
     }
 }

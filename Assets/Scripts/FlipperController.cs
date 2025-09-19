@@ -74,5 +74,6 @@ public class FlipperController : MonoBehaviour
         {
             _rigidbody.rotation = targetRotation;
         }
+        print(localRotation);
     }
 }

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!310 &1
+UnityConnectSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 6
+  m_Enabled: 0
+  m_TestMode: 0
+  m_EventOldUrl: https://api.uca.cloud.unity3d.com/v1/events
+  m_EventUrl: https://cdp.cloud.unity3d.com/v1/events
+  m_ConfigUrl: https://config.uca.cloud.unity3d.com
+  m_TestEventUrl: https://cdp.cloud.unity3d.com/v1/events
+  m_TestConfigUrl: https://config.uca.cloud.unity3d.com
+  m_TestInitMode: 0
+  CrashReportingSettings:
+    m_EventUrl: https://perf-events.cloud.unity3d.com
+    m_NativeEventUrl: https://perf-events.cloud.unity3d.com/symbol
+    m_Enabled: 0
+    m_LogBufferSize: 10
+    m_CaptureEditorExceptions: 1
+  UnityPurchasingSettings:
+    m_Enabled: 0
+    m_TestMode: 0
+  UnityAnalyticsSettings:
+    m_Enabled: 0
+    m_TestMode: 0
+    m_InitializeOnStartup: 1
+    m_PackageRequiringConsent: 0
+    m_PrivacyUrl: 
+  PerformanceReportingSettings:
+    m_Enabled: 0
+  CloudService:
+    m_ServiceEnabled: 0
+    m_ServiceTestMode: 0
+  cloudEnabled: 0

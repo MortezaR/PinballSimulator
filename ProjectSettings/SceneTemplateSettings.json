@@ -1,0 +1,12 @@
+{
+  "templateFolders": [
+    "Assets"
+  ],
+  "dependencyTypeInfos": [
+    {
+      "userAdded": false,
+      "type": "UnityEngine.Material"
+    }
+  ],
+  "defaultInstantiationMode": 0
+}
